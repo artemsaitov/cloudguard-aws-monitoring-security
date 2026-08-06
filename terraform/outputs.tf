@@ -67,3 +67,23 @@ output "ec2_instance_profile" {
   description = "IAM instance profile attached to the CloudGuard servers."
   value       = aws_iam_instance_profile.ec2_monitoring.name
 }
+
+output "operational_sns_topic_arn" {
+  description = "SNS topic used for operational CloudWatch alerts."
+  value       = aws_sns_topic.operational_alerts.arn
+}
+
+output "cloudwatch_dashboard_name" {
+  description = "Name of the CloudGuard operations dashboard."
+  value       = aws_cloudwatch_dashboard.cloudguard.dashboard_name
+}
+
+output "cloudwatch_alarm_names" {
+  description = "Names of the CloudGuard operational alarms."
+
+  value = [
+    aws_cloudwatch_metric_alarm.dev_high_cpu.alarm_name,
+    aws_cloudwatch_metric_alarm.prod_low_disk.alarm_name,
+    aws_cloudwatch_metric_alarm.prod_high_memory.alarm_name
+  ]
+}
