@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euxo pipefail
+
+dnf update -y
+dnf install -y amazon-cloudwatch-agent stress-ng nmap
+
+cat > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json <<'CWCONFIG'
+${cloudwatch_agent_config}
+CWCONFIG
+
+/opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
+  -a fetch-config \
+  -m ec2 \
+  -c file:/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json \
+  -s
+
+systemctl enable amazon-cloudwatch-agent
+systemctl restart amazon-cloudwatch-agent
+
+cat > /etc/motd <<'MOTD'
+CloudGuard Development Server
+Managed by Terraform
+Access through AWS Systems Manager Session Manager
+MOTD

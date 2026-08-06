@@ -43,3 +43,9 @@ variable "prod_subnet_cidr" {
   type        = string
   default     = "10.20.2.0/24"
 }
+
+variable "instance_type" {
+  description = "EC2 instance type used for the Dev and Production lab servers."
+  type        = string
+  default     = "t3.micro"
+}

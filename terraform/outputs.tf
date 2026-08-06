@@ -32,3 +32,38 @@ output "prod_availability_zone" {
   description = "Availability Zone used by the production subnet."
   value       = aws_subnet.prod.availability_zone
 }
+
+output "dev_instance_id" {
+  description = "Instance ID of the CloudGuard development server."
+  value       = aws_instance.dev.id
+}
+
+output "prod_instance_id" {
+  description = "Instance ID of the CloudGuard production server."
+  value       = aws_instance.prod.id
+}
+
+output "dev_private_ip" {
+  description = "Private IP address of the development server."
+  value       = aws_instance.dev.private_ip
+}
+
+output "prod_private_ip" {
+  description = "Private IP address of the production server."
+  value       = aws_instance.prod.private_ip
+}
+
+output "dev_public_ip" {
+  description = "Public IP address of the development server."
+  value       = aws_instance.dev.public_ip
+}
+
+output "prod_public_ip" {
+  description = "Public IP address of the production server."
+  value       = aws_instance.prod.public_ip
+}
+
+output "ec2_instance_profile" {
+  description = "IAM instance profile attached to the CloudGuard servers."
+  value       = aws_iam_instance_profile.ec2_monitoring.name
+}
