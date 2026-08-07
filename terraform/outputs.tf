@@ -87,3 +87,13 @@ output "cloudwatch_alarm_names" {
     aws_cloudwatch_metric_alarm.prod_high_memory.alarm_name
   ]
 }
+
+output "operational_triage_lambda_name" {
+  description = "Name of the Lambda function used for operational incident triage."
+  value       = aws_lambda_function.operational_triage.function_name
+}
+
+output "operational_triage_lambda_arn" {
+  description = "ARN of the operational-triage Lambda function."
+  value       = aws_lambda_function.operational_triage.arn
+}
